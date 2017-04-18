@@ -1,4 +1,8 @@
 <?php
+/*
+This example uses an array called a session array, one of a few arrays that are provided by web apps.
+It is an array that can store variables that you might need as you move from webpage to webpage
+*/
 include_once('connect.php');
 // if the dbc variable points no where, we direct them back to login page
 if (!$dbc) {
@@ -26,7 +30,8 @@ $checkstmt->store_result();
 $rows= $checkstmt->num_rows;
 $checkstmt->free_result();
 if($rows >0){
-  // We are logged in
+  // We are logged in, start the session
+  session_start();
 }
 else {
   // Invalid credentials
