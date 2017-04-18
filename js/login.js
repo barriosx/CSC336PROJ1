@@ -1,6 +1,72 @@
 var url;
 var method;
 var data={};
+
+// PROCESS LOGIN WHEN LOGIN BUTTON IS CLICKED
+$('.login-form').on('submit',function(){
+
+  // for each div element inside the class 'login-info'
+  // find each div element whose class is 'form control' and append its value
+  // into our obj data
+  $('.login-info').find('.form-control').each(function(index,value) {
+      data[$(this).attr('name')] = $(this).val();
+  });
+  // At this point we have object {usr: "xxx", passwd: "xxxx"} , now we send a request
+  // to the server
+
+  method = $(this).attr('method'); // server needs a method to send its data
+  url = $(this).attr('action'); // it needs a url to insert its request into
+  var clientR = new XMLHttpRequest(); // create request object
+  data = JSON.stringify(data); // cast our obj into string, specifically a JSON file
+  // STEPS
+  //  1.  When we create our request object, we need to call the open method, which
+  //  essentially is the physical communication that the client begins with the server
+  //  .send(params) =(send method , url go to, async)
+  /*
+      async: boolean that indicates whether or not to perform the operation asynchronously. i.e.
+
+      If this value is false, the send() method does not return until a response from the server is received.
+      If true, notification of a completed transaction is provided using event listeners.
+      This must be true if the multipart attribute is true, or an exception will be thrown.
+  */
+  clientR.open(method,url, true);
+  clientR.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+  // 2. This is our event listener, an object property whose value is an anon. function that checks to
+  // see if our request was send successfully
+  clientR.onreadystatechange = function () {
+    // if our request tranfer is complete and http status is OK
+    if (clientR.readyState == 4 && clientR.status == 200) {
+        try {
+          // responsedata stores our login user info if user is authenticated
+          responsedata = JSON.parse(clientR.responseText);
+          // responsedata is an OBJECT at this point, not a string anymore
+
+          if (responsedata == "") {
+              // Back up for our catch statement
+              wrongPass();
+          }
+          else {
+            // Fade out and redirect to new page
+            $(document.body).addClass('animated fadeOut');
+            // CODE ...
+          }
+        } catch (e if e instanceof SyntaxError) {
+            // This is where the client actually handles the error of a wrong pw
+            wrongPass();
+        }
+        }
+  };
+  //  3. Sending our request. We can send without giving a parameter.
+  //     We do that when we are usually just reading data or requesting/querying info
+  //     that doesnt require some filter variable to aid in our query
+  clientR.send(data);
+  return false;
+});
+
+
+// AUXILLARY METHODS for webpage dynamic-ness
+
 /*
   Using a combination of JQuery and a javascript plugin called animated which makes the page more dynamic
 */
@@ -26,62 +92,6 @@ $('.reset-form').on('submit', function(){
       });
 
     return false;
-});
-// Process login data
-$('.login-form').on('submit',function(){
-
-  // for each div element inside the class 'login-info'
-  // find each div element whose class is 'form control' and append its value
-  // into our obj data
-  $('.login-info').find('.form-control').each(function(index,value) {
-      data[$(this).attr('name')] = $(this).val();
-  });
-
-
-  // At this point we have object {usr: "xxx", passwd: "xxxx"} , now we send a request
-  // to the server
-
-  method = $(this).attr('method'); // server needs a method to send its data
-  url = $(this).attr('action'); // it needs a url to insert its request into
-  var clientR = new XMLHttpRequest(); // create request object
-  data = JSON.stringify(data); // cast our obj into string, specifically a JSON file
-  // STEPS
-  //  1.  When we create our request object, we need to call the open method, which
-  //  essentially is the physical communication that the client begins with the server
-  //  .send(params) =(send method , url go to, async)
-  /*
-      async: boolean that indicates whether or not to perform the operation asynchronously. i.e.
-
-      If this value is false, the send() method does not return until a response from the server is received.
-      If true, notification of a completed transaction is provided using event listeners.
-      This must be true if the multipart attribute is true, or an exception will be thrown.
-  */
-  clientR.open(method,url, true);
-  clientR.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-
-  // This is our event listener, an object property whose value is an anon. function that checks to
-  // see if our request was send successfully
-  clientR.onreadystatechange = function () {
-    // if our request tranfer is complete and http status is OK
-    if (clientR.readyState == 4 && clientR.status == 200) {
-        try {
-          // responsedata stores our login user info if user is authenticated
-          responsedata = JSON.parse(clientR.responseText);
-          if (responsedata == "") {
-              wrongPass();
-          }
-          else {
-            // Fade out and redirect to new page
-            $(document.body).addClass('animated fadeOut');
-            // CODE ...
-          }
-        } catch (e if e instanceof SyntaxError) {
-            wrongPass();
-        }
-        }
-  };
-  clientR.send(data);
-  return false;
 });
 
 // Method that simply clears and animates the password box if wrong password
