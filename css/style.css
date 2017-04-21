@@ -19,9 +19,10 @@ body{
   text-align: center;
 }
 #formAnimate {
--webkit-animation-duration: 3s;
--moz-animation-duration: 3s;
--ms-transition-animation-duration: 3s;
+-webkit-animation-duration: 1s;
+-moz-animation-duration: 1s;
+-ms-transition-animation-duration: 1s;
+animation-duration: 1s;
 }
 .form .form-button{
   outline: 0;
@@ -58,9 +59,10 @@ body{
   font-size: 14px;
 }
 #hdrAnimate{
-  -webkit-animation-duration: 2.35s;
-  -moz-animation-duration: 2.35s;
-  -ms-transition-animation-duration: 2.35s;
+  -webkit-animation-duration: 1.1s;
+  -moz-animation-duration: 1.1s;
+  -ms-transition-animation-duration: 1.1s;
+  animation-duration: 1s;
 }
 .hdr .thumbnail{
   width: 375px;

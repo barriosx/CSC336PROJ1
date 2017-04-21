@@ -1,0 +1,12 @@
+ // 1 Answers the question: how much is it to travel from station1 to station2 (moving north)
+select SUM(Fare) from (select Fare from Segments where (Seg_id%2=1 and North_end<=6 and South_end>=1)) As tbl;
+
+// 2 Question: What train can service the trip from station1 to station2 (moving north)
+// need stops at table
+
+// 3 Question: What is the status of the available train that can service the trip   
+// Lists the seat status of all trains between two stations moving north
+select * from FreeSeats where seg_id in (select seg_id from Segments where Seg_id%2=1 and North_end <=5 and South_end>=2);
+
+// 4 Question: Are there available seats at each point ?: decrement, return NO 
+

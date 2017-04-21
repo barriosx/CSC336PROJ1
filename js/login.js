@@ -2,7 +2,7 @@ var url;
 var method;
 var data={};
 
-// PROCESS LOGIN WHEN LOGIN BUTTON IS CLICKED
+// PROCESS LOGIN WHEN LOGIN BUTTON IS CLICKED (form on "SUBMIT")
 $('.login-form').on('submit',function(){
 
   // for each div element inside the class 'login-info'
@@ -32,7 +32,7 @@ $('.login-form').on('submit',function(){
   clientR.open(method,url, true);
   clientR.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 
-  // 2. This is our event listener, an object property whose value is an anon. function that checks to
+  // 2. This is our event listener, an object property whose value is an anonymous function that checks to
   // see if our request was send successfully
   clientR.onreadystatechange = function () {
     // if our request tranfer is complete and http status is OK
@@ -50,6 +50,7 @@ $('.login-form').on('submit',function(){
             // Fade out and redirect to new page
             $(document.body).addClass('animated fadeOut');
             // CODE ...
+
           }
         } catch (e if e instanceof SyntaxError) {
             // This is where the client actually handles the error of a wrong pw
@@ -71,13 +72,14 @@ $('.login-form').on('submit',function(){
   Using a combination of JQuery and a javascript plugin called animated which makes the page more dynamic
 */
 $(document.body).ready(function() {
-  $('.form').addClass('animated fadeIn');
-  $('.hdr').addClass('animated fadeIn');
+  $('.form').addClass('animated fadeInUp');
+  $('.hdr').addClass('animated fadeInUp');
 });
 
 // JQuery method that toggles the display between both login and registration forms. This method relies on display style  of
 // the reset form to be none
 $('.prompt a').on('click',function(){
+  $('input:text').val('');
   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 });
 

@@ -5,6 +5,7 @@
   <title>Test Page</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
 </head>
 <body>
@@ -17,16 +18,16 @@
           <input type="text" class="form-control" placeholder="username" name="newusr"/>
           <input type="text" class="form-control" placeholder="email" name="usremail"/>
         </div>
-        <input type="submit" class="form-button" name="resetbtn" value="reset">
+        <input type="submit" class="form-button" name="resetbtn" value="register">
         <p class="prompt">Know password? <a href="#">Sign in</a></p>
     </form>
     <form class="login-form" action="php/login.php" method="POST">
       <div class="login-info">
-        <input type="text" class="form-control" placeholder="username" name="usr"/>
+        <input type="text" class="form-control" placeholder="email" name="usr"/>
         <input type="password" class="form-control" placeholder="password" name="passwd"/>
       </div>
       <input type="submit" class="form-button" name="login" value="log in">
-      <p class="prompt">Forgot password? <a href="#">Reset password</a></p>
+      <p class="prompt">Not registered? <a href="#">Register</a></p>
     </form>
     <script src="js/login.js"></script>
   </div>

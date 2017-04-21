@@ -1,0 +1,44 @@
+*{
+  font-family: 'Roboto', sans-serif;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    background-color: #3c5144;
+}
+#btn-close-modal {
+    margin: 5px auto;
+    text-align: center;
+    cursor:pointer;
+    font-weight: lighter;
+    width: 50px;
+    height: 50;
+    color: white;
+}
+
+
+.fa-spin-hover:hover {
+  color:#f2f7ff;
+  -webkit-animation: fa-spin 1.5s infinite linear;
+  -moz-animation: fa-spin 1.5s infinite linear;
+  animation: fa-spin 1.5s infinite linear;
+}
+.fa-search {
+  font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

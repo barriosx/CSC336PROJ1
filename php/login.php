@@ -23,7 +23,7 @@ ini_set('display_errors', 1);
 $user = $rawdata['usr'];
 $pass = $rawdata['passwd'];
 // Set up our sql command
-$checkstmt = $dbc->prepare("SELECT USER, PW FROM USERS WHERE USER = ? and PW = ?");
+$checkstmt = $dbc->prepare("SELECT passenger_id FROM Passengers WHERE email = ? and pass = ?");
 $checkstmt->bind_param("ss",$user,$pass);
 $checkstmt->execute();
 $checkstmt->store_result();
@@ -38,5 +38,4 @@ else {
   $dbc->close();
 
 }
-
 ?>
