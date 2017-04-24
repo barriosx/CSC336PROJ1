@@ -11,7 +11,7 @@ $('.login-form').on('submit',function(){
   $('.login-info').find('.form-control').each(function(index,value) {
       data[$(this).attr('name')] = $(this).val();
   });
-  // At this point we have object {usr: "xxx", passwd: "xxxx"} , now we send a request
+  // At this point we have object data = {usr: "xxx", passwd: "xxxx"} , now we send a request
   // to the server
 
   method = $(this).attr('method'); // server needs a method to send its data
@@ -27,7 +27,6 @@ $('.login-form').on('submit',function(){
 
       If this value is false, the send() method does not return until a response from the server is received.
       If true, notification of a completed transaction is provided using event listeners.
-      This must be true if the multipart attribute is true, or an exception will be thrown.
   */
   clientR.open(method,url, true);
   clientR.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
@@ -49,7 +48,7 @@ $('.login-form').on('submit',function(){
           else {
             // Fade out and redirect to new page
             $(document.body).addClass('animated fadeOut');
-            // CODE ...
+            window.location.replace("splashboard.html");
 
           }
         } catch (e if e instanceof SyntaxError) {

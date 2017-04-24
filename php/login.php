@@ -1,10 +1,15 @@
 <?php
 /*
-This example uses an array called a session array, one of a few arrays that are provided by web apps.
+This example uses an array called the session superglobal, one of a few unique arrays.
 It is an array that can store variables that you might need as you move from webpage to webpage
 */
-include_once('connect.php');
+//include_once('connect.php');
 // if the dbc variable points no where, we direct them back to login page
+$dbc = new mysqli('localhost','root','root','S17336team6');
+if(mysqli_connect_errno()){
+  // if mysqli has error, we catch it and display what error was
+  die('Unable to connect ()' . $dbc->connect_error . ')');
+}
 if (!$dbc) {
   header("Location: ../LOGIN_PAGE.html");
 }
@@ -31,11 +36,11 @@ $rows= $checkstmt->num_rows;
 $checkstmt->free_result();
 if($rows >0){
   // We are logged in, start the session
-  session_start();
+  $response['success'] = "Yes";
 }
 else {
   // Invalid credentials
-  $dbc->close();
-
+  $response['success'] = "No";
 }
+echo json_encode($response);
 ?>

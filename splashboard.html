@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="plugins/font-awesome-4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src="plugins/MomentPlugin/moment.min.js" type="text/javascript"></script>
+  <script src="plugins/vex-3.0.0/dist/js/vex.combined.min.js"></script>
+  <script>vex.defaultOptions.className = 'vex-theme-plain'</script>
+  <link rel="stylesheet" href="plugins/vex-3.0.0/dist/css/vex.css" />
+  <link rel="stylesheet" href="plugins/vex-3.0.0/dist/css/vex-theme-plain.css" />
   <title>Welcome to train rail reservation system</title>
 </head>
 <body>
@@ -27,12 +31,17 @@
     </div>
     <div class="modal-content">
         <!-- Content-->
-        <form action="php/getTrains.php" method="post">
+        <form action="php/getTrains.php" class="find-trips" method="post">
             <input type="text" class="form-control" placeholder="from" name="startTrip"/>
             <input type="text" class="form-control" placeholder="to" name="endTrip"/>
-            <input type="text" class="form-control" placeholder="&#xf073; depart" name="dateTrip"/>
+            <input type="text" class="form-control fa-calendar" placeholder="&#xf073; depart" name="dateTrip"/>
             <input type="submit" class="btn fa-search" name="btnfind" value="&#xf002; find"/>
         </form>
+        <div class="tripsList">
+          <ul id="tripList">
+
+          </ul>
+        </div>
     </div>
   </div>
   <div id="modal-02">
@@ -57,5 +66,6 @@
   <script src="plugins/animatedModalPlugin/animatedModal.min.js"></script>
   <script src="plugins/PikadayPlugin/pikaday.js"></script>
   <script src="js/splash.js"></script>
+  <script src="js/reserve.js"></script>
 </body>
 </html>

@@ -31,7 +31,15 @@ li a:hover {
     height: 50;
     color: white;
 }
-
+.modal-content .form-control{
+padding: 4.5px 0px 4.5px 0px;
+border-top-left-radius: 3px;
+border-top-right-radius: 3px;
+border-bottom-left-radius: 3px;
+border-bottom-right-radius: 3px;
+/*box-sizing: border-box;*/
+font-size: 14px;
+}
 
 .fa-spin-hover:hover {
   color:#f2f7ff;
@@ -40,5 +48,8 @@ li a:hover {
   animation: fa-spin 1.5s infinite linear;
 }
 .fa-search {
-  font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: FontAwesome, 'Roboto', Helvetica, Arial, sans-serif;
+}
+.fa-calendar{
+  font-family: FontAwesome, 'Roboto', Helvetica, Arial, sans-serif;
 }
