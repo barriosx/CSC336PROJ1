@@ -18,22 +18,26 @@
 <body>
   <div class="mainform" id="splash">
     <ul>
-      <li><a id="buytix" href="#animatedModal"><i class="fa fa-ticket" aria-hidden="true"></i> Buy Tickets</a></li>
+      <li><a id="buytix" href="#modal-01"><i class="fa fa-ticket" aria-hidden="true"></i> Buy Tickets</a></li>
       <li><a id="edittix" href="#modal-02"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modify/Cancel Trip</a></li>
       <li><a id="trains" href="#modal-03"><i class="fa fa-train" aria-hidden="true"></i> Check Trains</a></li>
       <li style="float:right;"><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a></li>
     </ul>
     <div class="thumbnail"><img src="img/amtrk.png"></div>
   </div>
-  <!--- 'Subforms' inside --->
-  <div id="animatedModal">
-    <div id="btn-close-modal" class="close-animatedModal"><i class="fa fa-times-circle-o fa-3x fa-spin-hover" aria-hidden="true"></i>
+  <!-- 'Subforms' inside -->
+  <div id="modal-01">
+    <div id="btn-close-modal" class="close-modal-01"><i class="fa fa-times-circle-o fa-3x fa-spin-hover" aria-hidden="true"></i>
     </div>
     <div class="modal-content">
         <!-- Content-->
         <form action="php/getTrains.php" class="find-trips" method="post">
-            <input type="text" class="form-control" placeholder="from" name="startTrip"/>
-            <input type="text" class="form-control" placeholder="to" name="endTrip"/>
+            <select required name="startTrip" class="form-control combo">
+              <option value="" disabled selected hidden>from</option>
+            </select>
+            <select required name="endTrip" class="form-control combo">
+              <option value="" disabled selected hidden>to</option>
+            </select>
             <input type="text" class="form-control fa-calendar" placeholder="&#xf073; depart" name="dateTrip"/>
             <input type="submit" class="btn fa-search" name="btnfind" value="&#xf002; find"/>
         </form>

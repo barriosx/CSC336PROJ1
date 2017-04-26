@@ -7,6 +7,7 @@ var tripDate = new Pikaday(
 });
 // Import animatedModal plugin
 $("#buytix").animatedModal({
+    modalTarget:'modal-01',
     animatedIn:'fadeInUp',
     animatedOut:'bounceOutDown',
     color:'rgba(51, 51, 51,0.97)',
