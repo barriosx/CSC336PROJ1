@@ -3,10 +3,36 @@ select SUM(Fare) from (select Fare from Segments where (Seg_id%2=1 and North_end
 
 // 2 Question: What train can service the trip from station1 to station2 (moving north)
 // need stops at table
+----------------------------------------------------------------------------------
+/////// PROTOTYPE 1
+select Trains.directions, Trains.train_id, Trains.train_days from Trains inner join (select Trains.train_id As tr from Trains inner join Stops_at on Stops_at.train_num=Trains.train_id where Stops_at.station_id = 1) As tbl1 on tbl1.tr= Trains.train_id inner join (select Trains.train_id As tr from Trains inner join Stops_at on Stops_at.train_num=Trains.train_id where Stops_at.station_id = 5)As tbl2 on tbl2.tr= Trains.train_id;
 
+/////// PROTOTYPE 1
+// list of trains that stop at either A or B or Both from stops_at
+select Stops_at.station_id, Trains.train_id, Trains.directions from Trains inner join Stops_at on Stops_at.train_num=Trains.train_id where (Trains.directions = 1 and (Stops_at.station_id=2 or Stops_at.station_id = 5))
+
+----------------------------------------------------------------------------------
 // 3 Question: What is the status of the available train that can service the trip   
+
 // Lists the seat status of all trains between two stations moving north
 select * from FreeSeats where seg_id in (select seg_id from Segments where Seg_id%2=1 and North_end <=5 and South_end>=2);
 
+
+// FOR TRAIN Xi , is numFree >0 at each segment 
+SELECT FreeSeats.numFree from FreeSeats inner join Trains on FreeSeats.train_id = Trains.train_id where Trains.train_id = 66 and FreeSeats.seg_id BETWEEN 3 and 7 ;
+
+
+
 // 4 Question: Are there available seats at each point ?: decrement, return NO 
 
+
+
+PROCESS 
+-> : Done via GUI
+js-> Done via front end code 
+db-> Done by db 
+
+
+-> select station A and B -> select  date -> click "find"
+
+js-> finds direction of travel based on A and B selection. db-> find the base price of trip. db->finds ALL trains that can service the trip.
