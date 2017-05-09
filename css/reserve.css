@@ -1,25 +1,28 @@
 *{
   font-family: 'Roboto', sans-serif;
 }
-ul {
+div .modal-content h1{
+  color: white;
+}
+.mainform ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
 }
-li {
+.mainform li {
     float: left;
 }
 
-li a {
+.mainform li a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
-li a:hover {
+.mainform li a:hover {
     background-color: #3c5144;
 }
 #btn-close-modal {
@@ -30,6 +33,46 @@ li a:hover {
     width: 50px;
     height: 50;
     color: white;
+}
+.tripDetails{
+  display: none;
+  align-content: center;
+  text-align: center;
+}
+.enTripDetails{
+  display: none;
+  align-content: center;
+  text-align: center;
+}
+.workSpace{
+  margin-top: 15px;
+}
+.workSpace ul#tripList{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+.workSpace ul#tripList ul{
+  padding-left: 0px;
+}
+.workSpace li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.workSpace ul#tripList ul li {
+  display: block;
+  color: #717a74;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.workSpace li a:hover {
+    background-color: #3c5144;
 }
 .modal-content .form-control{
 padding: 4.5px 0px 4.5px 0px;

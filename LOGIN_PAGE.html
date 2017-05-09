@@ -13,18 +13,18 @@
     <div class="thumbnail"><img src="img/trainlogo.jpeg"></div>
   </div>
   <div class="form" id="formAnimate">
-    <form class="reset-form" action="php/reset.php" method="POST">
+    <form class="reset-form">
         <div class="reset-info">
-          <input type="text" class="form-control" placeholder="username" name="newusr"/>
+          <input type="text" class="form-control" placeholder="first name" name="fname"/>
+          <input type="text" class="form-control" placeholder="last name" name="lname"/>
           <input type="text" class="form-control" placeholder="email" name="usremail"/>
         </div>
         <input type="submit" class="form-button" name="resetbtn" value="register">
         <p class="prompt">Know password? <a href="#">Sign in</a></p>
     </form>
-    <form class="login-form" action="php/login.php" method="POST">
+    <form class="login-form">
       <div class="login-info">
         <input type="text" class="form-control" placeholder="email" name="usr"/>
-        <input type="password" class="form-control" placeholder="password" name="passwd"/>
       </div>
       <input type="button" class="form-button" name="login" value="log in">
       <p class="prompt">Not registered? <a href="#">Register</a></p>
