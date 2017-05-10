@@ -40,8 +40,11 @@ $('.form-button').on('click',function(){
   Using a combination of JQuery and a javascript plugin called animated which makes the page more dynamic
 */
 $(document.body).ready(function() {
-  $('.form').addClass('animated fadeInUp');
-  $('.hdr').addClass('animated fadeInUp');
+  $('input[name=usr]').keyup(function(event) {
+    if (event.keyCode == 13) {
+      $('.form-button').click();
+    }
+  });
 });
 
 // JQuery method that toggles the display between both login and registration forms. This method relies on display style  of

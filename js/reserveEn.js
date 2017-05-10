@@ -1,23 +1,23 @@
 var data = {};
 var items=[];
 
-$('#tripList').on('click','li',function() {
+$('#enTripList').on('click','li',function() {
   data = {};
   data['train'] = $(this).text().slice(5);
-  data['numTix'] = $('select[name=numTix]').val();
-  data['start'] = $('select[name=startTrip]').val();
-  data['end'] = $('select[name=endTrip]').val();
-  data['date'] = tripDate.getMoment().format("YYYY-MM-DD");
+  data['numTix'] = $('select[name=enNumTix]').val();
+  data['start'] = $('select[name=enStartTrip]').val();
+  data['end'] = $('select[name=enEndTrip]').val();
+  data['date'] = enTripDate.getMoment().format("YYYY-MM-DD");
   console.log(data);
   vex.dialog.confirm({
     message: "Book trip with train "+$(this).text().slice(5)+"?",
-    appendLocation: '.workSpace',
+    appendLocation: '.enWorkSpace',
     callback: function(value) {
       if (value == true) {
         console.log("Booking......");
         vex.dialog.alert({
           message:"Trip booked!",
-          appendLocation: '.workSpace',
+          appendLocation: '.enWorkSpace',
           className: 'vex-theme-bottom-right-corner'
         });
         // prepare booking info
@@ -28,14 +28,32 @@ $('#tripList').on('click','li',function() {
 
 });
 
-});
 // Enhancement
 $('#edittix').focus(function() {
+  var method = "POST";
+  var url = "php/splash.php";
+  $.ajax({
+  url: url,
+  type: method,
+  dataType: 'json',
+  success: function(json) {
+    data = json;
+  },
+  error: function(errorobj,status,error) {
+    wrongPass();
+    console.log(error);
+  }
+});
   /* Act on the event */
   // for each key value par inside data, append each item into select boxes inside the trip form
-  if ($('select[name=enStartTrip]').children('option').length <= 1) {
+  if ($('.enfind-trips').find('select[name=startTrip]').children('option').length <= 1) {
     $.each(data, function (key, value) {
-         $('select[name$=Trip]')
+         $('.enfind-trips').find('select[name=startTrip]')
+              .append($('<option>', { value : key.slice(0, -1) })
+              .text(value));
+    });
+    $.each(data, function (key, value) {
+         $('.enfind-trips').find('select[name=endTrip]')
               .append($('<option>', { value : key.slice(0, -1) })
               .text(value));
     });
@@ -45,13 +63,9 @@ $('#edittix').focus(function() {
 $('input[name=enBtnFind]').on('click',function() {
   data = {};
   // want to empty unordered list before we add new train options to the list
-  $('#tripList').empty();
-    // for each '.form-control' inputs (start, end, date) in find-trips form, append data into our obj
-    $('.find-trips').find('.form-control').each(function(index,value) {
-      data[$(this).attr('name')] = $(this).val();
-    });
-    data['startTrip'] = Number(data['startTrip']);
-    data['endTrip'] = Number(data['endTrip']);
+  $('#enTripList').empty();
+    data['startTrip'] = Number($('select[name=enStartTrip]').val());
+    data['endTrip'] = Number($('select[name=enEndTrip]').val());
     // Check to see what direction we are moving in
     if(Number(data['startTrip']) < Number(data['endTrip'])){
       data['dir'] = 'N';
@@ -60,13 +74,13 @@ $('input[name=enBtnFind]').on('click',function() {
       data['dir'] = 'S';
     }
     // Get day of the trip (if weekday or weekend)
-    if(tripDate.getMoment().format("dd") == "Su" || tripDate.getMoment().format("dd") == "Sa"){
+    if(enTripDate.getMoment().format("dd") == "Su" || enTripDate.getMoment().format("dd") == "Sa"){
       data['day'] = "S";
     }
     else {
       data['day'] = "MF";
     }
-    data['dateTrip'] = tripDate.getMoment().format("YYYY-MM-DD")
+    data['dateTrip'] = enTripDate.getMoment().format("YYYY-MM-DD")
     console.log(data);
       /* Send our request to find available trains starting at station 1 and ending at station 2 on given date*/
     $.ajax({
@@ -87,7 +101,7 @@ $('input[name=enBtnFind]').on('click',function() {
           });
             li_items.push('</ul>');
         });
-        $('#tripList').append(li_items.join(''));
+        $('#enTripList').append(li_items.join(''));
       }
     });
   return false;
