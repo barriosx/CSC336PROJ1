@@ -46,7 +46,9 @@ $(document.body).ready(function() {
     }
   });
 });
-
+$('.login-form').on('submit',function() {
+  return false;
+});
 // JQuery method that toggles the display between both login and registration forms. This method relies on display style  of
 // the reset form to be none
 $('.prompt a').on('click',function(){
