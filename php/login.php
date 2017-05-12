@@ -15,8 +15,8 @@ ini_set('display_errors', 1);
 // Get global post parameters
 $user = $_POST['usr'];
 // Set up our sql command
-$checkstmt = $dbc->prepare("SELECT passenger_id FROM Passengers WHERE email = ?;");
-$checkstmt->bind_param("s",$user); // check check password once the dbc connection can be figured out
+$checkstmt = $dbc->prepare("SELECT passenger_id, fname,lname FROM Passengers WHERE email = ?;");
+$checkstmt->bind_param("s",$user,$f,$l); // check check password once the dbc connection can be figured out
 $checkstmt->execute();
 $checkstmt->store_result();
 $rows= $checkstmt->num_rows;
@@ -24,6 +24,10 @@ $checkstmt->free_result();
 if($rows >0){
   // We are logged in, start the session
   $response['success'] = "Yes";
+  session_start();
+  $_SESSION['ps_id'] = $user;
+  $_SESSION['first'] = $f;
+  $_SESSION['last'] = $l;
 }
 else {
   // Invalid credentials

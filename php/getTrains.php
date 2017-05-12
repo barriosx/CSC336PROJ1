@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include_once('connect.php');
   if (!$dbc) {
     header("Location: ../LOGIN_PAGE.html");

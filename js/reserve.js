@@ -95,13 +95,8 @@ $('#tripList').on('click','li',function() {
     callback: function(value) {
       if (value == true) {
         console.log("Booking......");
-        vex.dialog.alert({
-          message:"Trip booked!",
-          appendLocation: '.workSpace',
-          className: 'vex-theme-bottom-right-corner'
-        });
         // prepare booking info
-        //bookTrip(data);
+        bookTrip(data);
       }
     }
   });
@@ -124,7 +119,7 @@ function bookTrip(data){
     data: data,
     success: function(json) {
       vex.dialog.alert({
-        message:"Trip booked!",
+        message:"Thanks for booking your trip with us " + json['name'] + "!",
         appendLocation: '.workSpace',
         className: 'vex-theme-bottom-right-corner'
       });
