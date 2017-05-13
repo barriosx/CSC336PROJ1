@@ -56,9 +56,14 @@ $('input[name=btnfind]').on('click',function() {
 $('#buytix').focus(function() {
   /* Act on the event */
   // for each key value par inside data, append each item into select boxes inside the trip form
-  if ($('select[name=startTrip]').children('option').length <= 1) {
+  if ($('.find-trips').find('select[name=startTrip]').children('option').length <= 1) {
     $.each(data, function (key, value) {
-         $('select[name$=Trip]')
+         $('.find-trips').find('select[name=startTrip]')
+              .append($('<option>', { value : key.slice(0, -1) })
+              .text(value));
+    });
+    $.each(data, function (key, value) {
+         $('.find-trips').find('select[name=endTrip]')
               .append($('<option>', { value : key.slice(0, -1) })
               .text(value));
     });
