@@ -1,27 +1,7 @@
 var data = {};
 var items=[];
 
-$('#enTripList').on('click','li',function() {
-  data = {};
-  data['train'] = $(this).text().slice(5);
-  data['numTix'] = $('select[name=enNumTix]').val();
-  data['start'] = $('.enfind-trips').find('select[name=startTrip]').val();
-  data['end'] = $('.enfind-trips').find('select[name=endTrip]').val();
-  data['date'] = enTripDate.getMoment().format("YYYY-MM-DD");
-  console.log(data);
-  vex.dialog.confirm({
-    message: "Book trip with train "+$(this).text().slice(5)+"?",
-    appendLocation: '#ws2',
-    callback: function(value) {
-      if (value == true) {
-        console.log("Booking......");
-        // prepare booking info
-        //bookTrip(data);
-      }
-    }
-  });
 
-});
 
 // Enhancement
 $('#edittix').focus(function() {

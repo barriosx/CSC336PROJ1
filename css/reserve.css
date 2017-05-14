@@ -76,6 +76,37 @@ div .modal-content h1{
     background-color: #3c5144;
     cursor: pointer;
 }
+.enWorkSpace{
+  margin-top: 15px;
+}
+.enWorkSpace ul#enTripList{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+.enWorkSpace ul#enTripList ul{
+  padding-left: 0px;
+}
+.enWorkSpace li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.enWorkSpace ul#enTripList ul li {
+  display: block;
+  color: #717a74;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.enWorkSpace li a:hover {
+    background-color: #3c5144;
+    cursor: pointer;
+}
 .modal-content .form-control{
 padding: 4.5px 0px 4.5px 0px;
 border-top-left-radius: 3px;
