@@ -107,7 +107,7 @@ $('#tripList').on('click','li',function() {
   console.log(data);
   vex.dialog.confirm({
     message: "Book trip with train "+$(this).text().slice(5)+"?",
-    appendLocation: '.workSpace',
+    appendLocation: '#ws1',
     callback: function(value) {
       if (value == true) {
         console.log("Booking......");
@@ -136,7 +136,7 @@ function bookTrip(data){
     success: function(json) {
       vex.dialog.alert({
         message:"Thanks for booking your trip with us " + json['name'] + "!",
-        appendLocation: '.workSpace',
+        appendLocation: '#ws1',
         className: 'vex-theme-bottom-right-corner'
       });
     }

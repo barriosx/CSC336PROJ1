@@ -5,21 +5,16 @@ $('#enTripList').on('click','li',function() {
   data = {};
   data['train'] = $(this).text().slice(5);
   data['numTix'] = $('select[name=enNumTix]').val();
-  data['start'] = $('select[name=enStartTrip]').val();
-  data['end'] = $('select[name=enEndTrip]').val();
+  data['start'] = $('.enfind-trips').find('select[name=startTrip]').val();
+  data['end'] = $('.enfind-trips').find('select[name=endTrip]').val();
   data['date'] = enTripDate.getMoment().format("YYYY-MM-DD");
   console.log(data);
   vex.dialog.confirm({
     message: "Book trip with train "+$(this).text().slice(5)+"?",
-    appendLocation: '.enWorkSpace',
+    appendLocation: '#ws2',
     callback: function(value) {
       if (value == true) {
         console.log("Booking......");
-        vex.dialog.alert({
-          message:"Trip booked!",
-          appendLocation: '.enWorkSpace',
-          className: 'vex-theme-bottom-right-corner'
-        });
         // prepare booking info
         //bookTrip(data);
       }
@@ -75,8 +70,8 @@ $('input[name=enBtnFind]').on('click',function() {
   data = {};
   // want to empty unordered list before we add new train options to the list
   $('#enTripList').empty();
-    data['startTrip'] = Number($('select[name=enStartTrip]').val());
-    data['endTrip'] = Number($('select[name=enEndTrip]').val());
+    data['startTrip'] = Number($('.enfind-trips').find('select[name=startTrip]').val());
+    data['endTrip'] = Number($('.enfind-trips').find('select[name=endTrip]').val());
     // Check to see what direction we are moving in
     if(Number(data['startTrip']) < Number(data['endTrip'])){
       data['dir'] = 'N';
@@ -123,3 +118,10 @@ $('.close-modal-02').on('click', function() {
   $('body').find('input:text').val('');
   $('#enTripList').empty();
 });
+function bookTrip(data) {
+  vex.dialog.alert({
+    message:"Trip booked!",
+    appendLocation: '#ws2',
+    className: 'vex-theme-bottom-right-corner'
+  });
+}
