@@ -16,6 +16,5 @@
   while ($createstmt->fetch()) {
     $data[(string)$sid."_"] = $name; // I concat the '_' because i noticed that the browser will re order the station_id
   }
-
   echo json_encode($data);
  ?>

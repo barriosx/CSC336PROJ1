@@ -41,8 +41,8 @@
 
 
   //3 -  Insert ticket information
-  $bookstmnt = $dbc->prepare("INSERT INTO Tickets Values ('',?,?,?,?,?,?);");
-  $bookstmnt->bind_param("idsiii", $_SESSION['ps_id'],$cost,$_POST['date'],$_POST['train'],$_POST['start'],$_POST['end']);
+  $bookstmnt = $dbc->prepare("INSERT INTO Tickets Values ('',?,?,?,?,?,?,?);");
+  $bookstmnt->bind_param("idsiiii", $_SESSION['ps_id'],$cost,$_POST['date'],$_POST['train'],$_POST['start'],$_POST['end'],$_POST['numTix']);
   $bookstmnt->execute();
   $bookstmnt->free_result();
   //4 - Trigger shall run

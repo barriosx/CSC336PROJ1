@@ -93,7 +93,6 @@ $(document).ready(function() {
     data = json;
   },
   error: function(errorobj,status,error) {
-    wrongPass();
     console.log(error);
   }
 });
@@ -140,7 +139,16 @@ $('#enTripList').on('click','a',function() {
 });
 $('#splash').on('click', '#signoutbtn', function(event) {
   /* Act on the event */
-  console.log("hi");
+  $.ajax({
+  url: "./php/signout.php",
+  type: "POST",
+  success: function() {
+    window.location.replace("./LOGIN_PAGE.html");
+  },
+  error: function(errorobj,status,error) {
+    console.log(error);
+  }
+});
 });
 
 });

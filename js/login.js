@@ -13,7 +13,6 @@ $('.form-button').on('click',function(){
   });
   // At this point we have object data = {usr: "xxx", passwd: "xxxx"} , now we send a request
   // to the server
-
   method = "POST"; // server needs a method to send its data
   url = "php/login.php"; // it needs a url to insert its request into
   $.ajax({
@@ -22,8 +21,13 @@ $('.form-button').on('click',function(){
   dataType: 'json',
   data: data,
   success: function(json) {
-    $(document.body).addClass('animated bounceOutDown');
-    window.location.replace("splashboard.html");
+    if (json['success'] == "No") {
+      wrongPass();
+    }
+    else {
+      $(document.body).addClass('animated bounceOutDown');
+      window.location.replace("splashboard.html");
+    }
   },
   error: function(errorobj,status,error) {
     wrongPass();
@@ -78,5 +82,5 @@ function wrongPass() {
     /* Act on the event */
     $(this).removeClass(aName);
   });;
-  $('input[name=passwd]').val('');
+  $('input[name=usr]').val('');
 }
