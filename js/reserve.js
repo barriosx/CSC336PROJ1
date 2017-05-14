@@ -99,15 +99,15 @@ $(document).ready(function() {
 });
 $('#tripList').on('click','a',function() {
   data = {};
-  data['train'] = $(this).text().slice(5);
+  data['train'] = $(this).text().slice(6);
   data['numTix'] = $('select[name=numTix]').val();
   data['start'] = $('select[name=startTrip]').val();
   data['end'] = $('select[name=endTrip]').val();
   data['date'] = tripDate.getMoment().format("YYYY-MM-DD");
   console.log(data);
   vex.dialog.confirm({
-    message: "Book trip with train "+$(this).text().slice(5)+"?",
-    appendLocation: '#ws1',
+    message: "Book trip with train "+$(this).text().slice(6)+"?",
+    appendLocation: '.workSpace',
     callback: function(value) {
       if (value == true) {
         console.log("Booking......");
@@ -120,7 +120,7 @@ $('#tripList').on('click','a',function() {
 });
 $('#enTripList').on('click','a',function() {
   data = {};
-  data['train'] = $(this).text().slice(5);
+  data['train'] = $(this).text().slice(6);
   data['numTix'] = $('select[name=enNumTix]').val();
   data['start'] = $('.enfind-trips').find('select[name=startTrip]').val();
   data['end'] = $('.enfind-trips').find('select[name=endTrip]').val();
@@ -133,7 +133,7 @@ $('#enTripList').on('click','a',function() {
       if (value == true) {
         console.log("Booking......");
         // prepare booking info
-        //bookTrip(data);
+        bookTrip2(data);
       }
     }
   });
@@ -156,7 +156,22 @@ function bookTrip(data){
     success: function(json) {
       vex.dialog.alert({
         message:"Thanks for booking your trip with us " + json['name'] + "!",
-        appendLocation: '#ws1',
+        appendLocation: '.workSpace',
+        className: 'vex-theme-bottom-right-corner'
+      });
+    }
+  });
+}
+function bookTrip2(data){
+  $.ajax({
+    url: './php/bookTrip.php',
+    type: 'POST',
+    dataType: 'json',
+    data: data,
+    success: function(json) {
+      vex.dialog.alert({
+        message:"Thanks for booking your trip with us " + json['name'] + "!",
+        appendLocation: '#ws2',
         className: 'vex-theme-bottom-right-corner'
       });
     }

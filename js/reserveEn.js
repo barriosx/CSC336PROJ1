@@ -1,8 +1,6 @@
 var data = {};
 var items=[];
 
-
-
 // Enhancement
 $('#edittix').focus(function() {
   var method = "POST";
@@ -98,10 +96,3 @@ $('.close-modal-02').on('click', function() {
   $('body').find('input:text').val('');
   $('#enTripList').empty();
 });
-function bookTrip(data) {
-  vex.dialog.alert({
-    message:"Trip booked!",
-    appendLocation: '#ws2',
-    className: 'vex-theme-bottom-right-corner'
-  });
-}

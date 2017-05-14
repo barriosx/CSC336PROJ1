@@ -2,7 +2,7 @@
   session_start();
   include 'connect.php';
   //1 - Find direction of train for recalculation of train rcost
-  $tripstmt = $dbc->prepare('SELECT train_days from trains where train_id = ?');
+  $tripstmt = $dbc->prepare('SELECT train_days from Trains where train_id = ?');
   $tripstmt->bind_param("i",$_POST['train']);
   $tripstmt->execute();
   $tripstmt->bind_result($days);
