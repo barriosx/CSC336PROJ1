@@ -67,6 +67,17 @@ $('#buytix').focus(function() {
               .append($('<option>', { value : key.slice(0, -1) })
               .text(value));
     });
+    //Also insert into enhancement window
+    $.each(data, function (key, value) {
+         $('.enfind-trips').find('select[name=startTrip]')
+              .append($('<option>', { value : key.slice(0, -1) })
+              .text(value));
+    });
+    $.each(data, function (key, value) {
+         $('.enfind-trips').find('select[name=endTrip]')
+              .append($('<option>', { value : key.slice(0, -1) })
+              .text(value));
+    });
   }
 });
 

@@ -57,6 +57,17 @@ $('#edittix').focus(function() {
               .append($('<option>', { value : key.slice(0, -1) })
               .text(value));
     });
+    //Also insert into base window
+    $.each(data, function (key, value) {
+         $('.find-trips').find('select[name=startTrip]')
+              .append($('<option>', { value : key.slice(0, -1) })
+              .text(value));
+    });
+    $.each(data, function (key, value) {
+         $('.find-trips').find('select[name=endTrip]')
+              .append($('<option>', { value : key.slice(0, -1) })
+              .text(value));
+    });
   }
 });
 // Enhancement Finding list of trains that service a trip from station 1 to station 2
