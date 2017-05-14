@@ -4,7 +4,38 @@ var data={};
 
 // PROCESS LOGIN WHEN LOGIN BUTTON IS CLICKED
 $('.form-button').on('click',function(){
-
+  console.log($('.login-form').css('display') == "none");
+  if ($('.login-form').css('display') == "none") {
+    $('.reset-info').find('.form-control').each(function(index,value){
+      data[$(this).attr('name')] = $(this).val();
+    });
+    method = "POST"; // server needs a method to send its data
+    url = "php/create.php"; // it needs a url to insert its request into
+    $.ajax({
+    url: url,
+    type: method,
+    dataType: 'json',
+    data: data,
+    success: function(json) {
+      if (json['success'] == "No") {
+        vex.dialog.alert({
+          message: "Something went wrong.",
+          appendLocation: '.reset-form'
+        });
+      }
+      else {
+        vex.dialog.alert({
+          message: "Thanks for registering "+ json['fname'] +"!",
+          appendLocation: '.reset-form'
+        });
+      }
+    },
+    error: function(errorobj,status,error) {
+      console.log(error);
+    }
+  });
+  }
+  else{
   // for each div element inside the class 'login-info'
   // find each div element whose class is 'form control' and append its value
   // into our obj data
@@ -34,6 +65,7 @@ $('.form-button').on('click',function(){
     console.log(error);
   }
 });
+}
   return false;
 });
 
@@ -45,6 +77,11 @@ $('.form-button').on('click',function(){
 */
 $(document.body).ready(function() {
   $('input[name=usr]').keyup(function(event) {
+    if (event.keyCode == 13) {
+      $('.form-button').click();
+    }
+  });
+  $('input[name=usremail]').keyup(function(event) {
     if (event.keyCode == 13) {
       $('.form-button').click();
     }
@@ -64,33 +101,6 @@ $('.prompt a').on('click',function(){
 // JQuery event handler for when we hit reset once we fill in information to reset our password.
 // Process reset data into json file
 $('.reset-form').on('submit', function(){
-      $('.reset-info').find('.form-control').each(function(index,value){
-        data[$(this).attr('name')] = $(this).val();
-      });
-      method = "POST"; // server needs a method to send its data
-      url = "php/create.php"; // it needs a url to insert its request into
-      $.ajax({
-      url: url,
-      type: method,
-      dataType: 'json',
-      data: data,
-      success: function(json) {
-        if (json['success'] == "No") {
-          vex.dialog.alert({
-            message: "Thanks for registering "+ json['fname'] +"!",
-            appendLocation: '.reset-form'
-          });
-        }
-        else {
-
-        }
-      },
-      error: function(errorobj,status,error) {
-        wrongPass();
-        console.log(error);
-      }
-    });
-
     return false;
 });
 
