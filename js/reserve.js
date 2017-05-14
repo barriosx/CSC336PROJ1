@@ -137,8 +137,12 @@ $('#enTripList').on('click','a',function() {
       }
     }
   });
-
 });
+$('#splash').on('click', '#signoutbtn', function(event) {
+  /* Act on the event */
+  console.log("hi");
+});
+
 });
 //Close form animation
 $('.close-modal-01').on('click', function() {

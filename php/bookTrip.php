@@ -19,7 +19,7 @@
   if ((int)$_POST['start'] < (int)$_POST['end']) {
     //Find the cost to travel from start to end (moving north)
     $tripstmt = $dbc->prepare("SELECT SUM(Fare) FROM Segments where (Seg_id%2=1 and South_end>=? and North_end<=?)");
-    $tripstmt->bind_param("ii",$_POST['startTrip'],$_POST['endTrip']);
+    $tripstmt->bind_param("ii",$_POST['start'],$_POST['end']);
     $tripstmt->execute();
     $tripstmt->bind_result($cost);
     while ($tripstmt->fetch()) {
@@ -30,7 +30,7 @@
   else {
     //Find the cost to travel from start to end (moving south)
     $tripstmt = $dbc->prepare("SELECT SUM(Fare) FROM Segments where (Seg_id%2=0 and South_end<=? and North_end>=?)");
-    $tripstmt->bind_param("ii",$_POST['startTrip'],$_POST['endTrip']);
+    $tripstmt->bind_param("ii",$_POST['start'],$_POST['end']);
     $tripstmt->execute();
     $tripstmt->bind_result($cost);
     while ($tripstmt->fetch()) {
