@@ -352,7 +352,7 @@
           -o-animation: none;
           -webkit-backface-visibility: hidden; } }
     .vex.vex-theme-os .vex-dialog-button.vex-dialog-button-primary {
-      background: #3288e6;
+      background: #6ee5cb;
       color: #fff; }
     .vex.vex-theme-os .vex-dialog-button.vex-dialog-button-secondary {
       background: #e0e0e0;
@@ -368,6 +368,6 @@
   background: rgba(255, 255, 255, 0.2);
   width: 0;
   height: 0;
-  border: 1.2em solid #bbb;
+  border: 1.2em solid #f2f2f2;
   border-top-color: #f0f0f0;
   border-bottom-color: #f0f0f0; }

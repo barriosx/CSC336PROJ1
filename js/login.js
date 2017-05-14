@@ -64,11 +64,32 @@ $('.prompt a').on('click',function(){
 // JQuery event handler for when we hit reset once we fill in information to reset our password.
 // Process reset data into json file
 $('.reset-form').on('submit', function(){
-      url = $(this).attr('action');
-      method = $(this).attr('method');
       $('.reset-info').find('.form-control').each(function(index,value){
         data[$(this).attr('name')] = $(this).val();
       });
+      method = "POST"; // server needs a method to send its data
+      url = "php/create.php"; // it needs a url to insert its request into
+      $.ajax({
+      url: url,
+      type: method,
+      dataType: 'json',
+      data: data,
+      success: function(json) {
+        if (json['success'] == "No") {
+          vex.dialog.alert({
+            message: "Thanks for registering "+ json['fname'] +"!",
+            appendLocation: '.reset-form'
+          });
+        }
+        else {
+
+        }
+      },
+      error: function(errorobj,status,error) {
+        wrongPass();
+        console.log(error);
+      }
+    });
 
     return false;
 });
