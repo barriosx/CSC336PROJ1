@@ -2,7 +2,8 @@ var data = {};
 var items=[];
 
 // Finding list of trains that service a trip from station 1 to station 2
-$('input[name=btnfind]').on('click',function() {
+$('input[name=btnfind]').on('click',function(event) {
+  event.preventDefault();
   data = {};
   // want to empty unordered list before we add new train options to the list
   $('#tripList').empty();
@@ -96,7 +97,8 @@ $(document).ready(function() {
     console.log(error);
   }
 });
-$('#tripList').on('click','a',function() {
+$('#tripList').on('click','a',function(event) {
+  event.preventDefault();
   data = {};
   data['train'] = $(this).text().slice(6);
   data['numTix'] = $('select[name=numTix]').val();
@@ -118,6 +120,7 @@ $('#tripList').on('click','a',function() {
 
 });
 $('#enTripList').on('click','a',function() {
+  event.preventDefault();
   data = {};
   data['train'] = $(this).text().slice(6);
   data['numTix'] = $('select[name=enNumTix]').val();

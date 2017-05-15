@@ -3,8 +3,8 @@ var method;
 var data={};
 
 // PROCESS LOGIN WHEN LOGIN BUTTON IS CLICKED
-$('.form-button').on('click',function(){
-  console.log($('.login-form').css('display') == "none");
+$('.form-button').on('click',function(event){
+  event.preventDefault();
   if ($('.login-form').css('display') == "none") {
     $('.reset-info').find('.form-control').each(function(index,value){
       data[$(this).attr('name')] = $(this).val();
