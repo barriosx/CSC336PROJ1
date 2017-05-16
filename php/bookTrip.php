@@ -45,9 +45,20 @@
   $bookstmnt->bind_param("idsiiii", $_SESSION['ps_id'],$cost,$_POST['date'],$_POST['train'],$_POST['start'],$_POST['end'],$_POST['numTix']);
   $bookstmnt->execute();
   $bookstmnt->free_result();
-  //4 - Trigger shall run
+  //4 - Trigger shall run, then get the ticket number
+  $bookstmnt = $dbc->prepare("SELECT ticket_id from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ? and seats_requested = ?)");
+  $bookstmnt->bind_param("isii", $_SESSION['ps_id'],$_POST['date'],$_POST['train'],$_POST['numTix']);
+  $bookstmnt->execute();
+  $bookstmnt->bind_result($tix);
+  while ($bookstmnt->fetch()) {
+    $tix = $tix;
+  }
+  $bookstmnt->free_result();
 
   $response['name'] = ucfirst($_SESSION['first']);
+  $response['train'] = $_POST['train'];
+  $response['tix'] = = $tix;
+
   header("Content-Type: application/json");
   echo json_encode($response);
  ?>

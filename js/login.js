@@ -25,7 +25,7 @@ $('.form-button').on('click',function(event){
       }
       else {
         vex.dialog.alert({
-          message: "Thanks for registering "+ json['fname'] +"!",
+          message: "Thanks for registering "+ json['first'] +"!",
           appendLocation: '.reset-form'
         });
       }

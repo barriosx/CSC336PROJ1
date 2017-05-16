@@ -185,7 +185,7 @@ function bookTrip2(data){
     data: data,
     success: function(json) {
       vex.dialog.alert({
-        message:"Thanks for booking your trip with us " + json['name'] + "!",
+        message:"Thanks for booking your trip with us " + json['name'] + "!\nYour ticket number is " + json['tix'] +" on train " + json['train'] +".",
         appendLocation: '#ws2',
         className: 'vex-theme-bottom-right-corner'
       });
