@@ -76,7 +76,7 @@ $('input[name=enBtnFind]').on('click',function() {
         console.log(json);
         var li_items = [];
         var train_num = 0;
-        if (json== null) {
+        if (jQuery.isEmptyObject(json)) {
           vex.dialog.alert({
             message:"Sorry, there aren't any available trains for the requested trip.",
             appendLocation: '#ws2',
