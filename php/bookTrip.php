@@ -51,13 +51,12 @@
   $bookstmnt->execute();
   $bookstmnt->bind_result($tix);
   while ($bookstmnt->fetch()) {
-    $tix = $tix;
+    $response['tix'] = $tix;
   }
   $bookstmnt->free_result();
 
   $response['name'] = ucfirst($_SESSION['first']);
   $response['train'] = $_POST['train'];
-  $response['tix'] = = $tix;
 
   header("Content-Type: application/json");
   echo json_encode($response);
