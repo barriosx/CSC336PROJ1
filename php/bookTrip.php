@@ -13,7 +13,7 @@
     }
     elseif ($count >1) {
       $response['dup'] = true;
-      $tix = 'a group ticket of '$count.' passengers';
+      $tix = 'a group ticket of '.$count.' passengers';
     }
     else {
       $response['dup'] = false;
@@ -71,12 +71,13 @@
     $bookstmnt->execute();
     $bookstmnt->free_result();
     //4 - Trigger shall run, then get the ticket number
-    $bookstmnt = $dbc->prepare("SELECT ticket_id from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ? and seats_requested = ?)");
+    $bookstmnt = $dbc->prepare("SELECT ticket_id,seats_requested from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ? and seats_requested = ?)");
     $bookstmnt->bind_param("isii", $_SESSION['ps_id'],$_POST['date'],$_POST['train'],$_POST['numTix']);
     $bookstmnt->execute();
-    $bookstmnt->bind_result($tix);
+    $bookstmnt->bind_result($tix,$seats);
     while ($bookstmnt->fetch()) {
       $response['tix'] = $tix;
+      $response['seats'] = $seats;
     }
     $bookstmnt->free_result();
 
