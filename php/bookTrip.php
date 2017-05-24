@@ -71,16 +71,20 @@
     $bookstmnt->execute();
     $bookstmnt->free_result();
     //4 - Trigger shall run, then get the ticket number
-    $bookstmnt = $dbc->prepare("SELECT ticket_id,seats_requested from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ? and seats_requested = ?)");
+    $bookstmnt = $dbc->prepare("SELECT ticket_id from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ? and seats_requested = ?)");
     $bookstmnt->bind_param("isii", $_SESSION['ps_id'],$_POST['date'],$_POST['train'],$_POST['numTix']);
     $bookstmnt->execute();
-    $bookstmnt->bind_result($tix,$seats);
+    $bookstmnt->bind_result($tix);
     while ($bookstmnt->fetch()) {
       $response['tix'] = $tix;
-      $response['seats'] = $seats;
     }
     $bookstmnt->free_result();
-
+    if ($_POST['numTix'] >1) {
+      $response['seats'] = $_POST['numTix'].' seats'
+    }
+    else {
+      $response['seats'] = $_POST['numTix'].' seat'
+    }
     $response['name'] = ucfirst($_SESSION['first']);
     $response['train'] = $_POST['train'];
   }
