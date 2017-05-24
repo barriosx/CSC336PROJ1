@@ -55,6 +55,21 @@
   }
   $bookstmnt->free_result();
 
+
+  //Check for duplicate ticket
+  $bookstmnt = $dbc->prepare("SELECT COUNT(ticket_id) from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ?)");
+  $bookstmnt->bind_param("isii", $_SESSION['ps_id'],$_POST['date'],$_POST['train']);
+  $bookstmnt->execute();
+  $bookstmnt->bind_result($count);
+  while ($bookstmnt->fetch()) {
+    if ($count >1) {
+      $response['dup'] = true;
+    }
+    else {
+      $response['dup'] = false;
+    }
+  }
+  $bookstmnt->free_result();
   $response['name'] = ucfirst($_SESSION['first']);
   $response['train'] = $_POST['train'];
 
