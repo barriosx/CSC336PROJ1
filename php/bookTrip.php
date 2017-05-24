@@ -15,12 +15,9 @@
       $response['dup'] = true;
       $tix = 'a group ticket of '.$count.' passengers';
     }
-    else {
-      $response['dup'] = false;
-    }
   }
   $bookstmnt->free_result();
-  if ($response['dup']== true) {
+  if ($response['dup']) {
     $response['name'] = ucfirst($_SESSION['first']);
     $response['train'] = $_POST['train'];
     $response['tix'] = $tix;
@@ -87,6 +84,7 @@
     }
     $response['name'] = ucfirst($_SESSION['first']);
     $response['train'] = $_POST['train'];
+    $response['dup'] = "false";
   }
   header("Content-Type: application/json");
   echo json_encode($response);

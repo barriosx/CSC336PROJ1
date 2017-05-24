@@ -128,7 +128,7 @@ $('#tripList').on('click','a',function(event) {
   });
 
 });
-$('#enTripList').on('click','a',function() {
+$('#enTripList').on('click','a',function(event) {
   event.preventDefault();
   data = {};
   data['train'] = $(this).text().slice(6);
@@ -187,7 +187,7 @@ function bookTrip(data){
       }
       else {
       vex.dialog.alert({
-        message: "Thanks for booking your trip with us " + json['name'] + "!\nYour ticket number is " + json['tix'] +" on train " + json['train'] + " for " +json['seats'] +".",
+        message: "Thanks for booking your trip with us " + json['name'] + "! Your ticket number is " + json['tix'] +" on train " + json['train'] + " for " +json['seats'] +".",
         appendLocation: '.workSpace',
         className: 'vex-theme-plain'
       });
@@ -211,7 +211,7 @@ function bookTrip2(data){
       }
       else {
         vex.dialog.alert({
-          message:"Thanks for booking your trip with us " + json['name'] + "!\nYour ticket number is " + json['tix'] +" on train" +" for "+json['seats'] + ".",
+          message:"Thanks for booking your trip with us " + json['name'] + "!Your ticket number is " + json['tix'] + " on train" +" for " + json['seats'] + ".",
           appendLocation: '#ws2',
           className: 'vex-theme-bottom-right-corner'
         });
