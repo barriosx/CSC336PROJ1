@@ -180,7 +180,7 @@ function bookTrip(data){
     success: function(json) {
       if (json['dup'] == true) {
         vex.dialog.alert({
-          message: json['name'] + ", looks like you have already booked " + json['tix'] +"ticket(s) on train " + json['train'] +".",
+          message: json['name'] + ", looks like you have already booked " + json['tix'] +" for train " + json['train'] +".",
           appendLocation: '.workSpace',
           className: 'vex-theme-bottom-right-corner'
         });
@@ -189,7 +189,7 @@ function bookTrip(data){
       vex.dialog.alert({
         message:"Thanks for booking your trip with us " + json['name'] + "!",
         appendLocation: '.workSpace',
-        className: 'vex-theme-bottom-right-corner'
+        className: 'vex-theme-plain'
       });
     }
     }
@@ -204,7 +204,7 @@ function bookTrip2(data){
     success: function(json) {
       if (json['dup'] == true) {
         vex.dialog.alert({
-          message: json['name'] + ", looks like you have already booked " + json['tix'] +"ticket(s) on train " + json['train'] +".",
+          message: json['name'] + ", looks like you have already booked " + json['tix'] +" ticket(s) on train " + json['train'] +".",
           appendLocation: '#ws2',
           className: 'vex-theme-plain'
         });

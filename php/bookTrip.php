@@ -2,13 +2,18 @@
   session_start();
   include 'connect.php';
   //Check for duplicate ticket
-  $bookstmnt = $dbc->prepare("SELECT COUNT(ticket_id) from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ?)");
+  $bookstmnt = $dbc->prepare("SELECT seats_requested from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ?)");
   $bookstmnt->bind_param("isi", $_SESSION['ps_id'],$_POST['date'],$_POST['train']);
   $bookstmnt->execute();
   $bookstmnt->bind_result($count);
   while ($bookstmnt->fetch()) {
-    if ($count >=1) {
+    if ($count == 1) {
       $response['dup'] = true;
+      $tix = $count.' ticket';
+    }
+    elseif ($count >1) {
+      $response['dup'] = true;
+      $tix = 'a group ticket of '$count.' passengers';
     }
     else {
       $response['dup'] = false;
@@ -18,7 +23,7 @@
   if ($response['dup']== true) {
     $response['name'] = ucfirst($_SESSION['first']);
     $response['train'] = $_POST['train'];
-    $response['tix'] = $count;
+    $response['tix'] = $tix;
   }
   else {
     //1 - Find direction of train for recalculation of train rcost
