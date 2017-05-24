@@ -2,22 +2,33 @@
   session_start();
   include 'connect.php';
   //Check for duplicate ticket
-  $bookstmnt = $dbc->prepare("SELECT seats_requested from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ?)");
+  $bookstmnt = $dbc->prepare("SELECT COUNT(seats_requested) from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ?)");
   $bookstmnt->bind_param("isi", $_SESSION['ps_id'],$_POST['date'],$_POST['train']);
   $bookstmnt->execute();
   $bookstmnt->bind_result($count);
   while ($bookstmnt->fetch()) {
-    if ($count == 1) {
-      $response['dup'] = true;
-      $tix = $count.' ticket';
-    }
-    elseif ($count >1) {
-      $response['dup'] = true;
-      $tix = 'a group ticket of '.$count.' passengers';
-    }
+      if ($count >= 1) {
+        $response['dup'] = true;
+
+      }
+      else  {
+        $response['dup'] = false;
+      }
   }
   $bookstmnt->free_result();
-  if ($response['dup']) {
+  if ($response['dup'] == true) {
+    $bookstmnt = $dbc->prepare("SELECT seats_requested from Tickets where (passenger_id = ? and trip_date = ? and trip_train = ?)");
+    $bookstmnt->bind_param("isi", $_SESSION['ps_id'],$_POST['date'],$_POST['train']);
+    $bookstmnt->execute();
+    $bookstmnt->bind_result($count);
+    while ($bookstmnt->fetch()) {
+      if ($count > 1) {
+        $tix = 'a group ticket of '.$count.' passengers';
+      }
+      elseif ($count == 1) {
+        $tix = $count.' ticket';
+      }
+    }
     $response['name'] = ucfirst($_SESSION['first']);
     $response['train'] = $_POST['train'];
     $response['tix'] = $tix;
@@ -84,7 +95,7 @@
     }
     $response['name'] = ucfirst($_SESSION['first']);
     $response['train'] = $_POST['train'];
-    $response['dup'] = "false";
+    $response['dup'] = false;
   }
   header("Content-Type: application/json");
   echo json_encode($response);

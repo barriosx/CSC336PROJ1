@@ -73,6 +73,13 @@ $('input[name=enBtnFind]').on('click',function() {
       dataType: 'json',
       data: data,
       success: function(json) {
+        if (json == null) {
+          vex.dialog.alert({
+            message:"Sorry, there aren't any available trains for the requested trip.",
+            appendLocation: '#ws2',
+            className: 'vex-theme-plain'
+          });
+        }
         console.log(json);
         var li_items = [];
         var train_num = 0;
@@ -92,7 +99,7 @@ $('input[name=enBtnFind]').on('click',function() {
         console.log(error);
         vex.dialog.alert({
           message:"Sorry, there aren't any available trains for the requested trip.",
-          appendLocation: '.workSpace',
+          appendLocation: '#ws2',
           className: 'vex-theme-plain'
         });
       }

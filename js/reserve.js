@@ -36,6 +36,13 @@ $('input[name=btnfind]').on('click',function(event) {
       dataType: 'json',
       data: data,
       success: function(json) {
+        if (json == null) {
+          vex.dialog.alert({
+            message:"Sorry, there aren't any available trains for the requested trip.",
+            appendLocation: '#ws1',
+            className: 'vex-theme-plain'
+          });
+        }
         console.log(json);
         var li_items = [];
         var train_num = 0;
@@ -55,7 +62,7 @@ $('input[name=btnfind]').on('click',function(event) {
         console.log(error);
         vex.dialog.alert({
           message:"Sorry, there aren't any available trains for the requested trip.",
-          appendLocation: '.workSpace',
+          appendLocation: '#ws1',
           className: 'vex-theme-plain'
         });
       }
@@ -117,7 +124,7 @@ $('#tripList').on('click','a',function(event) {
   console.log(data);
   vex.dialog.confirm({
     message: "Book trip with train "+$(this).text().slice(6)+"?",
-    appendLocation: '.workSpace',
+    appendLocation: '#ws1',
     callback: function(value) {
       if (value == true) {
         console.log("Booking......");
