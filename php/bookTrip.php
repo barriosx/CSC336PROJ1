@@ -80,10 +80,10 @@
     }
     $bookstmnt->free_result();
     if ($_POST['numTix'] >1) {
-      $response['seats'] = $_POST['numTix'].' seats'
+      $response['seats'] = $_POST['numTix'].' seats';
     }
     else {
-      $response['seats'] = $_POST['numTix'].' seat'
+      $response['seats'] = $_POST['numTix'].' seat';
     }
     $response['name'] = ucfirst($_SESSION['first']);
     $response['train'] = $_POST['train'];
